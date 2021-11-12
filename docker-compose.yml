@@ -1,0 +1,47 @@
+version: "3"
+
+networks:
+  nordkraft-bot-network:
+    driver: bridge
+
+volumes:
+  nordkraft-bot-db-volume:
+
+services:
+  nordkraft-bot-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sh start_server.sh development
+    volumes:
+      - ${PWD}/app.log:/app/app.log
+    expose: 
+      - ${PORT}
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - "PORT=${PORT}"
+    networks:
+      - nordkraft-bot-network
+    depends_on:
+      - nordkraft-bot-db
+
+  nordkraft-bot-db:
+    image: postgres:latest
+    expose:
+      - ${DB_PORT}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    
+    restart: always
+    volumes:
+      - nordkraft-bot-db-volume:/var/lib/postgresql/data
+
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PORT: ${DB_PORT}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+
+    networks:
+      - nordkraft-bot-network

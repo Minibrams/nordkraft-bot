@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "configurations": [
+    // Standard start and debug
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "smartStep": true,
+      "program": "${workspaceFolder}/src/app.ts",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "autoAttachChildProcesses": true,
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "args": []
+    },
+
+    // Attach to an already running API
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach",
+      "restart": true,
+      "processId": "${command:PickProcess}"
+    }
+  ]
+}

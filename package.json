@@ -1,0 +1,55 @@
+{
+  "name": "nordkraft-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && tsc",
+    "serve": "npm run build && nodemon --config nodemon.json src/app.ts",
+    "serve:debug": "npm run build && nodemon --config nodemon.json --inspect-brk src/app.ts",
+    "serve:prod": "npm run build && NODE_ENV=production node dist/app.js",
+    "test": "npm run build && nyc mocha -r ts-node/register 'src/**/*.test.ts'",
+    "premigration:generate": "node ./scripts/load-orm-config.js",
+    "migration:generate": "npm run build && ts-node ./node_modules/typeorm/cli.js migration:generate --pretty -n",
+    "postmigration:generate": "node ./scripts/restore-orm-config.js",
+    "premigration:run": "node ./scripts/load-orm-config.js",
+    "migration:run": "npm run build && ts-node ./node_modules/typeorm/cli.js migration:run",
+    "postmigration:run": "node ./scripts/restore-orm-config.js",
+    "premigration:revert": "node ./scripts/load-orm-config.js",
+    "migration:revert": "npm run build && ts-node ./node_modules/typeorm/cli.js migration:revert",
+    "postmigration:revert": "node ./scripts/restore-orm-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Minibrams/nordkraft-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Minibrams/nordkraft-bot/issues"
+  },
+  "homepage": "https://github.com/Minibrams/nordkraft-bot#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.13.0",
+    "express-winston": "^4.2.0",
+    "helmet": "^4.6.0",
+    "inversify": "^6.0.1",
+    "inversify-express-utils": "^6.4.3",
+    "pg": "^8.7.1",
+    "prettyjson": "^1.2.1",
+    "puppeteer": "^11.0.0",
+    "typeorm": "^0.2.40",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}

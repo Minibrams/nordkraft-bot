@@ -1,0 +1,14 @@
+{
+  "entities": [
+     "src/models/entities/**/*.ts"
+  ],
+  "migrations": [
+     "src/models/migrations/**/*.ts"
+  ],
+  "cli": {
+     "entitiesDir": "src/models/entities",
+     "migrationsDir": "src/models/migrations"
+  },
+  "synchronize": false,
+  "logging": false
+}
