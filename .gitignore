@@ -126,3 +126,4 @@ prod_backups
 
 screenshots
 *.log
+.git.bfg*
