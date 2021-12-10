@@ -8,6 +8,19 @@ volumes:
   nordkraft-bot-db-volume:
 
 services:
+  # Client
+  nordkraft-bot-client:
+    build:
+      context: ./front/nordkraft-bot-client
+      dockerfile: Dockerfile
+    
+    ports:
+      - "5000:5000"
+    
+    networks:
+      - nordkraft-bot-network
+
+  # API
   nordkraft-bot-api:
     build:
       context: ./back
@@ -26,6 +39,7 @@ services:
     depends_on:
       - nordkraft-bot-db
 
+  # Database
   nordkraft-bot-db:
     image: postgres:latest
     expose:
