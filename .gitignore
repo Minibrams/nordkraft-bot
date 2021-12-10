@@ -125,3 +125,4 @@ backups/
 prod_backups
 
 screenshots
+*.log

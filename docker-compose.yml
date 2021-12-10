@@ -15,7 +15,10 @@ services:
       dockerfile: Dockerfile
     
     ports:
-      - "5000:5000"
+      - "3000:3000"
+
+    depends_on:
+      - nordkraft-bot-api
     
     networks:
       - nordkraft-bot-network
@@ -26,6 +29,10 @@ services:
       context: ./back
       dockerfile: Dockerfile
     command: sh start_server.sh development
+    depends_on:
+      - nordkraft-bot-db
+    env_file:
+      - ./.env
     volumes:
       - ./app.log:/app/app.log
     expose: 
