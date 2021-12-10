@@ -10,11 +10,11 @@ volumes:
 services:
   nordkraft-bot-api:
     build:
-      context: .
+      context: ./back
       dockerfile: Dockerfile
     command: sh start_server.sh development
     volumes:
-      - ${PWD}/app.log:/app/app.log
+      - ./app.log:/app/app.log
     expose: 
       - ${PORT}
     ports:

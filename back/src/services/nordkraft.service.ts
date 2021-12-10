@@ -120,7 +120,7 @@ export class NordkraftService implements INordkraftService {
     await loginButton?.evaluate((b: HTMLButtonElement) => b.click())
     await page.waitForSelector('[id$="loginname"]')
 
-    logger.info(`Entering user info (username: ${username}, password: XXXXXXXXX)`)
+    logger.info(`Entering user info (username: ${username}, password: ***********)`)
     const usernameField = await page.$('[id$=loginname]')
     const passwordField = await page.$('[id$=password]')
     const submitButton = await page.$('[id$="sub"]')
